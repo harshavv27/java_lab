@@ -1,31 +1,30 @@
-package food.main;
+package library.main;
 
-import food.model.FoodOrder;
-import food.model.RegularOrder;
-import food.model.PremiumOrder;
-import food.service.OrderService;
+import library.model.LibraryResource;
+import library.model.Book;
+import library.model.DigitalResource;
+import library.service.LibraryService;
 
 public class Main {
     public static void main(String[] args) {
-        // Create six orders stored in an array of FoodOrder
-        FoodOrder[] orders = new FoodOrder[6];
-        orders[0] = new RegularOrder(101, "Arjun Sharma", 500);
-        orders[1] = new PremiumOrder(102, "Priya Mehta", 800);
-        orders[2] = new RegularOrder(103, "Rahul Verma", 350);
-        orders[3] = new PremiumOrder(104, "Sneha Patel", 1200);
-        orders[4] = new RegularOrder(105, "Karan Singh", 620);
-        orders[5] = new PremiumOrder(106, "Anjali Gupta", 950);
+        // Create five library resource objects stored in an array
+        LibraryResource[] resources = new LibraryResource[5];
+        resources[0] = new Book(1, "Clean Code", "Robert C. Martin", "Technology");
+        resources[1] = new Book(2, "The Alchemist", "Paulo Coelho", "Fiction");
+        resources[2] = new DigitalResource(3, "Introduction to Java", "Herbert Schildt", "PDF");
+        resources[3] = new DigitalResource(4, "Data Structures Explained", "Mark Allen Weiss", "ePub");
+        resources[4] = new Book(5, "Wings of Fire", "A.P.J. Abdul Kalam", "Biography");
 
-        System.out.println("===== FOOD ORDER MANAGEMENT =====");
-        System.out.println("Restaurant: "+FoodOrder.restaurantName);
+        // Overdue days for each resource (0 means not overdue)
+        int[] overdueDays = {0, 3, 5, 0, 7};
+
+        // Display complete details of all resources
+        LibraryService.displayAllDetails(resources);
+
+        // Calculate and display total fine
+        LibraryService.calculateTotalFine(resources, overdueDays);
+
         System.out.println();
-
-        // Display bill, discount, delivery charge, and final amount for each order
-        for (FoodOrder order : orders) {
-            OrderService.displayBill(order);
-        }
-
-        System.out.println("\n===== SUMMARY =====");
-        FoodOrder.displayTotalOrders();
+        LibraryResource.displayTotalResources();
     }
 }
